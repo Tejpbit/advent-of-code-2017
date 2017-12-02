@@ -1,5 +1,5 @@
 
-class Day2 {
+class Day2: Day {
 
     fun parse(input: String): List<List<Int>> {
         val lines = input.lines()
@@ -10,12 +10,14 @@ class Day2 {
         }
     }
 
-    fun part1(input: List<List<Int>>): Int {
-        return input.sumBy { getRowDiff(it) }
+    override fun part1(input: String): Any {
+        val parsed = parse(input)
+        return parsed.sumBy { getRowDiff(it) }
     }
 
-    fun part2(input: List<List<Int>>): Int {
-        return input.sumBy { getRowDivisor(it) }
+    override fun part2(input: String): Int {
+        val parsed = parse(input)
+        return parsed.sumBy { getRowDivisor(it) }
     }
 
     fun getRowDiff(row: List<Int>): Int {

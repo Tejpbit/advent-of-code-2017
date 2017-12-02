@@ -5,16 +5,16 @@ class AdventOfCodeTest {
     @Test
     fun day1() {
         val d = Day1()
-        assertEquals(d.calcCaptcha("1122"), 3)
-        assertEquals(d.calcCaptcha("1111"), 4)
-        assertEquals(d.calcCaptcha("1234"), 0)
-        assertEquals(d.calcCaptcha("91212129"), 9)
+        assertEquals(d.part1("1122"), 3)
+        assertEquals(d.part1("1111"), 4)
+        assertEquals(d.part1("1234"), 0)
+        assertEquals(d.part1("91212129"), 9)
 
-        assertEquals(d.calcCaptcha2("1212"), 6)
-        assertEquals(d.calcCaptcha2("1221"), 0)
-        assertEquals(d.calcCaptcha2("123425"), 4)
-        assertEquals(d.calcCaptcha2("123123"), 12)
-        assertEquals(d.calcCaptcha2("12131415"), 4)
+        assertEquals(d.part2("1212"), 6)
+        assertEquals(d.part2("1221"), 0)
+        assertEquals(d.part2("123425"), 4)
+        assertEquals(d.part2("123123"), 12)
+        assertEquals(d.part2("12131415"), 4)
     }
 
     @Test
@@ -29,7 +29,7 @@ class AdventOfCodeTest {
         assertEquals(4, d.getRowDiff(listOf(7,5,3)))
         assertEquals(6, d.getRowDiff(listOf(2,4,6,8)))
 
-        assertEquals(d.part1(d.parse(input)), 18)
+        assertEquals(d.part1(input), 18)
 
 
         assertEquals(4, d.getRowDivisor(listOf(5,9,2,8)))
