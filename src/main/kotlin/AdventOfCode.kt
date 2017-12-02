@@ -3,9 +3,32 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.system.measureNanoTime
 
-val dayInstances = hashMapOf(
-        "01" to Day1(),
-        "02" to Day2()
+val dayInstances = arrayOf(
+        Day1(),
+        Day2(),
+        Day3(),
+        Day4(),
+        Day5(),
+        Day6(),
+        Day7(),
+        Day8(),
+        Day9(),
+        Day10(),
+        Day11(),
+        Day12(),
+        Day13(),
+        Day14(),
+        Day15(),
+        Day16(),
+        Day17(),
+        Day18(),
+        Day19(),
+        Day20(),
+        Day21(),
+        Day22(),
+        Day23(),
+        Day24(),
+        Day25()
 )
 
 interface Day<T> {
@@ -33,19 +56,19 @@ fun main(args: Array<String>) {
         return
     }
 
-    run(dayOfMonth)
+    run(day)
 }
 
-fun run(dayOfMonth: String) {
+fun run(dayOfMonth: Int) {
 
     val time = measureNanoTime {
-        val daysData = loadRawData("input/day$dayOfMonth.dat")
+        val daysData = loadRawData("input/day${dayOfMonth.toString().padStart(2, '0')}.dat")
 
-        val d = dayInstances[dayOfMonth] as Day<Any>
+        val d = dayInstances[dayOfMonth - 1] as Day<Any>
         val parsed = d.parse(daysData)
 
-        println(d.part1(parsed))
-        println(d.part2(parsed))
+        println("Part1 answer: ${d.part1(parsed)}")
+        println("Part2 answer: ${d.part2(parsed)}")
 
     }
 

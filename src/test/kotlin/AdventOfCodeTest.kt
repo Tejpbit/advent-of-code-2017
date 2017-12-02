@@ -29,11 +29,16 @@ class AdventOfCodeTest {
         assertEquals(4, d.getRowDiff(listOf(7,5,3)))
         assertEquals(6, d.getRowDiff(listOf(2,4,6,8)))
 
-        assertEquals(d.part1(input), 18)
+        assertEquals(d.part1(d.parse(input)), 18)
 
 
         assertEquals(4, d.getRowDivisor(listOf(5,9,2,8)))
         assertEquals(3, d.getRowDivisor(listOf(9,4,7,3)))
         assertEquals(2, d.getRowDivisor(listOf(3,8,6,5)))
+    }
+
+    @Test
+    fun day3() {
+        val d = Day3()
     }
 }
