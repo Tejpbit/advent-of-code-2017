@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/advent-of-code-2017.iml" filepath="$PROJECT_DIR$/.idea/modules/advent-of-code-2017.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/advent-of-code-2017_main.iml" filepath="$PROJECT_DIR$/.idea/modules/advent-of-code-2017_main.iml" group="advent-of-code-2017" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/advent-of-code-2017_test.iml" filepath="$PROJECT_DIR$/.idea/modules/advent-of-code-2017_test.iml" group="advent-of-code-2017" />
+    </modules>
+  </component>
+</project>
