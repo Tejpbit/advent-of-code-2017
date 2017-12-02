@@ -1,8 +1,8 @@
 
-class Day1 : Day {
-    /*override fun parse(input: String): String {
+class Day1 : Day<String> {
+    override fun parse(input: String): String {
         return input
-    }*/
+    }
 
     override fun part1(input: String): Any {
         var sum = 0
