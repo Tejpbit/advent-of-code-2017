@@ -12,8 +12,10 @@ class Day4: Day<List<List<String>>> {
     }
 
     override fun part2(input: List<List<String>>): Any {
-        val sortedLists = input.map { it -> it.map { it -> it.toList().sorted() } }
-        return sortedLists.map { it -> isValid(it) }.count {it}
+        val sortedLists = input.map {
+            sublist -> sublist.map { word -> word.toList().sorted() }
+        }
+        return sortedLists.map { isValid(it) }.count {it}
 
     }
 
