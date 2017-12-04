@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class AdventOfCodeTest {
     @Test
@@ -63,5 +65,20 @@ class AdventOfCodeTest {
         assertEquals(31 , d.part1(d.parse("1024")))
     }
 
+    @Test
+    fun day4() {
+        val d = Day4()
+
+
+        assertTrue {d.isValid(listOf("aa", "bb", "cc", "dd", "ee"))}
+        assertFalse {d.isValid(listOf("aa", "bb", "cc", "dd", "aa"))}
+        assertTrue {d.isValid(listOf("aa", "bb", "cc", "dd", "aaa"))}
+
+
+        val p1 = d.parse("aa bb cc dd ee\n" +
+                "aa bb cc dd aa\n" +
+                "aa bb cc dd aaa")
+
+        assertEquals(2, d.part1(p1))
     }
 }
