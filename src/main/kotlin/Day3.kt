@@ -70,7 +70,7 @@ class Day3: Day<Map<Day3.Coord, Int>> {
         return buildSpiral(input.toInt(), ::calculateValue2)
     }
 
-    private fun buildSpiral(target: Int, valueFunction: (m: HashMap<Coord, Int>, c: Coord, prev: Coord) -> Int): Map<Coord, Int> {
+    private fun buildSpiral(target: Int, valueFunction: (m: Map<Coord, Int>, c: Coord, prev: Coord) -> Int): Map<Coord, Int> {
         val m = HashMap<Coord, Int>()
         m[Coord(0,0)] = 1
         var pos = Coord(0,0)
@@ -107,12 +107,12 @@ class Day3: Day<Map<Day3.Coord, Int>> {
         }
     }
 
-    private fun calculateValue1(m: HashMap<Coord, Int>, c: Coord, movedFrom: Coord): Int {
+    private fun calculateValue1(m: Map<Coord, Int>, c: Coord, movedFrom: Coord): Int {
         val value = m[c.move(movedFrom)]
         return value!! +1
     }
 
-    fun calculateValue2(m: HashMap<Coord, Int>, c: Coord, prev: Coord): Int {
+    fun calculateValue2(m: Map<Coord, Int>, c: Coord, prev: Coord): Int {
         val sum = c.neighbours().map { it -> m[it] }.sumBy { it ?: 0 }
         return sum
     }
