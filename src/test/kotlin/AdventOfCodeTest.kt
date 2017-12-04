@@ -40,5 +40,28 @@ class AdventOfCodeTest {
     @Test
     fun day3() {
         val d = Day3()
+
+
+        assertEquals(listOf(listOf(1)), d.parse("1"))
+        assertEquals(listOf(
+                listOf(5,4,3),
+                listOf(6,1,2),
+                listOf(7,8,9)), d.parse("9"))
+
+        assertEquals(listOf(
+                listOf(17,16,15,14,13),
+                listOf(18,5,4,3,12),
+                listOf(19,6,1,2,11),
+                listOf(20,7,8,9,10),
+                listOf(21,22,23,24,25)), d.parse("10"))
+
+        assertEquals(1, d.findYIndex(d.parse("12"), 12))
+
+        assertEquals(0, d.part1(d.parse("1")))
+        assertEquals(3, d.part1(d.parse("12")))
+        assertEquals(2, d.part1(d.parse("23")))
+        assertEquals(31 , d.part1(d.parse("1024")))
+    }
+
     }
 }
