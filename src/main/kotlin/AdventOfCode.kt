@@ -33,6 +33,7 @@ val dayInstances = arrayOf(
 
 interface Day<T> {
     fun parse(input: String): T
+    fun parse2(input: String): T {return parse(input)}
     fun part1(input: T): Any
     fun part2(input: T): Any
 }
@@ -65,10 +66,11 @@ fun run(dayOfMonth: Int) {
         val daysData = loadRawData("input/day${dayOfMonth.toString().padStart(2, '0')}.dat")
 
         val d = dayInstances[dayOfMonth - 1] as Day<Any>
-        val parsed = d.parse(daysData)
+        val parsed1 = d.parse(daysData)
+        val parsed2 = d.parse2(daysData)
 
-        println("Part1 answer: ${d.part1(parsed)}")
-        println("Part2 answer: ${d.part2(parsed)}")
+        println("Part1 answer: ${d.part1(parsed1)}")
+        println("Part2 answer: ${d.part2(parsed2)}")
 
     }
 
