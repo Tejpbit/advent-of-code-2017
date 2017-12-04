@@ -44,25 +44,23 @@ class AdventOfCodeTest {
         val d = Day3()
 
 
-        assertEquals(listOf(listOf(1)), d.parse("1"))
-        assertEquals(listOf(
-                listOf(5,4,3),
-                listOf(6,1,2),
-                listOf(7,8,9)), d.parse("9"))
-
-        assertEquals(listOf(
-                listOf(17,16,15,14,13),
-                listOf(18,5,4,3,12),
-                listOf(19,6,1,2,11),
-                listOf(20,7,8,9,10),
-                listOf(21,22,23,24,25)), d.parse("10"))
-
-        assertEquals(1, d.findYIndex(d.parse("12"), 12))
+        assertEquals(mapOf(
+                Day3.Coord(0,0) to 1,
+                Day3.Coord(1,0) to 2,
+                Day3.Coord(1,1) to 3,
+                Day3.Coord(0,1) to 4,
+                Day3.Coord(-1,1) to 5,
+                Day3.Coord(-1,0) to 6,
+                Day3.Coord(-1,-1) to 7
+        ), d.parse("1"))
 
         assertEquals(0, d.part1(d.parse("1")))
         assertEquals(3, d.part1(d.parse("12")))
         assertEquals(2, d.part1(d.parse("23")))
         assertEquals(31 , d.part1(d.parse("1024")))
+
+
+        assertEquals(806 , d.part2(d.parse2("747")))
     }
 
     @Test

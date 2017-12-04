@@ -1,68 +1,132 @@
 import kotlin.math.absoluteValue
 
-class Day3: Day<List<List<Int>>> {
+class Day3: Day<Map<Day3.Coord, Int>> {
 
-    private var input = ""
+    var target = ""
 
-    override fun parse(input: String): List<List<Int>> {
-        this.input = input
+    val NORTH = Coord(0,1)
+    val SOUTH = Coord(0,-1)
+    val WEST = Coord(-1,0)
+    val EAST = Coord(1,0)
 
-        val targetValue = input.toInt()
-        val grid = mutableListOf(mutableListOf(1))
-        while (true) {
-            var prev = grid.last().last()
-
-            if (prev >= targetValue) {
-                break
-            }
-
-            val beginIndex = grid.size - 1
-            val prevGridWidth = grid.size
-
-
-
-            //append to previous rows
-            grid.reversed().forEach { it.add(prev+1); prev++ }
-
-            //New top row
-            val topList = (grid.last().size + prev + 1 downTo prev + 1).toMutableList()
-            prev += topList.size
-
-            //add head to previous rows
-            grid.forEach { it.add(0, prev+1); prev++ }
-
-            val bottomList = (prev+1..prev+prevGridWidth+2).toMutableList()
-
-            grid.add(0, topList)
-            grid.add(bottomList)
+    class Coord(val x: Int, val y: Int) {
+        fun move(direction: Coord): Coord {
+            return Coord(
+                    this.x + direction.x,
+                    this.y + direction.y
+            )
         }
 
-        return grid
+        fun manhattanDistance(coord: Coord): Int {
+            return this.x.minus(coord.x).absoluteValue +
+                    this.y.minus(coord.y).absoluteValue
+        }
+
+        fun neighbours(): List<Coord> {
+            return listOf(
+                    Coord(x-1, y-1),
+                    Coord(x-1, y),
+                    Coord(x-1, y+1),
+                    Coord(x, y+1),
+                    Coord(x, y-1),
+                    Coord(x+1, y-1),
+                    Coord(x+1, y),
+                    Coord(x+1, y+1)
+            )
+        }
+
+        fun opposite(): Coord {
+            return Coord(-x, -y)
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as Coord
+
+            if (x != other.x) return false
+            if (y != other.y) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = x
+            result = 31 * result + y
+            return result
+        }
     }
 
-    override fun part1(input: List<List<Int>>): Any {
-        val target = this.input.toInt()
+    override fun parse(input: String): Map<Coord, Int> {
+        this.target = input
 
-        val yIndex = findYIndex(input, target)
-        val xIndex = input[yIndex].indexOf(target)
-
-        val yIndexFor1 = input.size/2
-        val xIndexFor1 = input.size/2
-
-
-        val yDiff = yIndex.minus(yIndexFor1).absoluteValue
-        val xDiff = xIndex.minus(xIndexFor1).absoluteValue
-
-
-        return yDiff+xDiff
+        return buildSpiral(input.toInt(), ::calculateValue1)
     }
 
-    fun findYIndex(input: List<List<Int>>, target: Int): Int {
-        return input.indexOf( input.find { x -> x.contains(target) } )
+    override fun parse2(input: String): Map<Coord, Int> {
+        this.target = input
+
+        return buildSpiral(input.toInt(), ::calculateValue2)
     }
 
-    override fun part2(input: List<List<Int>>): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private fun buildSpiral(target: Int, valueFunction: (m: HashMap<Coord, Int>, c: Coord, prev: Coord) -> Int): Map<Coord, Int> {
+        val m = HashMap<Coord, Int>()
+        m[Coord(0,0)] = 1
+        var pos = Coord(0,0)
+        var nextEast = 1
+        var nextNorth = 1
+        var nextWest = 2
+        var nextSouth = 2
+
+
+        fun stretch(length: Int, direciton: Coord) {
+            for (x in length downTo 1) {
+                pos = pos.move(direciton)
+                m[pos] = valueFunction(m, pos, direciton.opposite())
+            }
+        }
+
+        while (true) {
+            if (m[pos]!! > target) {
+                return m
+            }
+
+            stretch(nextEast, EAST)
+            nextEast += 2
+
+            stretch(nextNorth, NORTH)
+            nextNorth += 2
+
+            stretch(nextWest, WEST)
+            nextWest += 2
+
+            stretch(nextSouth, SOUTH)
+            nextSouth += 2
+
+        }
+    }
+
+    private fun calculateValue1(m: HashMap<Coord, Int>, c: Coord, movedFrom: Coord): Int {
+        val value = m[c.move(movedFrom)]
+        return value!! +1
+    }
+
+    fun calculateValue2(m: HashMap<Coord, Int>, c: Coord, prev: Coord): Int {
+        val sum = c.neighbours().map { it -> m[it] }.sumBy { it ?: 0 }
+        return sum
+    }
+
+    override fun part1(input: Map<Coord, Int>): Any {
+        val e = input.entries.find { e -> e.value == target.toInt() }
+        val coord = e!!.key
+        return coord.manhattanDistance(Coord(0,0))
+    }
+
+    override fun part2(input: Map<Coord, Int>): Any {
+        val e = input.values.sorted().dropWhile { it <= target.toInt()}
+
+        return e[0]
     }
 
 }
