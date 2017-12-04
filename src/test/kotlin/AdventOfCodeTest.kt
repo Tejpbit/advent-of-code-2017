@@ -78,5 +78,12 @@ class AdventOfCodeTest {
                 "aa bb cc dd aaa")
 
         assertEquals(2, d.part1(p1))
+
+        val p2 = d.parse("abcde fghij\n" +
+                "abcde xyz ecdab\n" +
+                "a ab abc abd abf abj\n" +
+                "iiii oiii ooii oooi oooo\n" +
+                "oiii ioii iioi iiio")
+        assertEquals(3, d.part2(p2))
     }
 }
