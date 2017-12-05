@@ -86,4 +86,17 @@ class AdventOfCodeTest {
                 "oiii ioii iioi iiio")
         assertEquals(3, d.part2(p2))
     }
+
+    @Test
+    fun day5() {
+        val d = Day5()
+
+        val p1 = d.parse("0\n3\n0\n1\n-3")
+        assertEquals(listOf(0,3,0,1,-3), p1)
+
+        val p2 = d.parse("0\n3\n0\n1\n-3")
+
+        assertEquals(5, d.part1(p1))
+        assertEquals(10, d.part2(p2))
+    }
 }
