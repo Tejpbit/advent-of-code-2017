@@ -9,7 +9,7 @@ class Day3: Day<Map<Day3.Coord, Int>> {
     val WEST = Coord(-1,0)
     val EAST = Coord(1,0)
 
-    class Coord(val x: Int, val y: Int) {
+    data class Coord(val x: Int, val y: Int) {
         fun move(direction: Coord): Coord {
             return Coord(
                     this.x + direction.x,
@@ -39,23 +39,6 @@ class Day3: Day<Map<Day3.Coord, Int>> {
             return Coord(-x, -y)
         }
 
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (javaClass != other?.javaClass) return false
-
-            other as Coord
-
-            if (x != other.x) return false
-            if (y != other.y) return false
-
-            return true
-        }
-
-        override fun hashCode(): Int {
-            var result = x
-            result = 31 * result + y
-            return result
-        }
     }
 
     override fun parse(input: String): Map<Coord, Int> {
