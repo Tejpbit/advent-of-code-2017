@@ -113,11 +113,5 @@ fun loadRawData(path: String): String {
 
 fun printFormatted(title: String, nanotime: Long) {
     val milliseconds = nanotime / 1000000
-
     println(java.lang.String.format("%6s%10d", title, milliseconds))
-
-}
-
-fun formatNanoAsMilli(duration: Long): String {
-    return "${duration/1000000} ms"
 }
