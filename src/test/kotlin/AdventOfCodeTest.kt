@@ -99,4 +99,27 @@ class AdventOfCodeTest {
         assertEquals(5, d.part1(p1))
         assertEquals(10, d.part2(p2))
     }
+
+    @Test
+    fun day6() {
+        val d = Day6()
+
+        //val p1 = d.parse("")
+        var p1 = mutableListOf(0,2,7,0)
+        d.redistribute(p1)
+        assertEquals(listOf(2,4,1,2), p1)
+        d.redistribute(p1)
+        assertEquals(listOf(3,1,2,3), p1)
+        d.redistribute(p1)
+        assertEquals(listOf(0,2,3,4), p1)
+        d.redistribute(p1)
+        assertEquals(listOf(1,3,4,1), p1)
+        d.redistribute(p1)
+        assertEquals(listOf(2,4,1,2), p1)
+
+        p1 = mutableListOf(0,2,7,0)
+        assertEquals(5, d.part1(p1))
+        p1 = mutableListOf(0,2,7,0)
+        assertEquals(4, d.part2(p1))
+    }
 }
