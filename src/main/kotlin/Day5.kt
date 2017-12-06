@@ -1,6 +1,6 @@
 class Day5: Day<MutableList<Int>>{
     override fun parse(input: String): MutableList<Int> {
-        return input.lines().map { it.toInt() }.toMutableList()
+        return input.lines().map(String::toInt).toMutableList()
     }
 
     override fun part1(input: MutableList<Int>): Any {
@@ -12,7 +12,7 @@ class Day5: Day<MutableList<Int>>{
         return doJumps(input) { if (it >= 3) {it-1} else it+1 }
     }
 
-    fun doJumps(input: MutableList<Int>, body: (Int) -> Int): Int {
+    inline fun doJumps(input: MutableList<Int>, body: (Int) -> Int): Int {
         var currentPos = 0
         var jumps = 0
 
