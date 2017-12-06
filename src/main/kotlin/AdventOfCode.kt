@@ -1,4 +1,5 @@
 import java.io.File
+import java.sql.Time
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.system.measureNanoTime
@@ -62,25 +63,59 @@ fun main(args: Array<String>) {
 
 fun run(dayOfMonth: Int) {
 
-    val time = measureNanoTime {
-        val daysData = loadRawData("input/day${dayOfMonth.toString().padStart(2, '0')}.dat")
 
-        val d = dayInstances[dayOfMonth - 1] as Day<Any>
-        val parsed1 = d.parse(daysData)
-        val parsed2 = d.parse2(daysData)
+    val startLoadData = System.nanoTime()
+    val daysData = loadRawData("input/day${dayOfMonth.toString().padStart(2, '0')}.dat")
+    val endLoadData = System.nanoTime()
 
-        println("Part1 answer: ${d.part1(parsed1)}")
-        println("Part2 answer: ${d.part2(parsed2)}")
+    val d = dayInstances[dayOfMonth - 1] as Day<Any>
+    val startParse1 = System.nanoTime()
+    val parsed1 = d.parse(daysData)
+    val endParse1 = System.nanoTime()
+    val startParse2 = System.nanoTime()
+    val parsed2 = d.parse2(daysData)
+    val endParse2 = System.nanoTime()
 
-    }
+    val startPart1 = System.nanoTime()
+    val ansPart1 = try {d.part1(parsed1)} catch (e: NotImplementedError) {null}
+    val endPart1 = System.nanoTime()
+    val startPart2 = System.nanoTime()
+    val ansPart2 = try {d.part2(parsed2)} catch (e: NotImplementedError) {null}
+    val endPart2 = System.nanoTime()
 
-    println("Main running time ${time/1000000}ms\n${time}ns")
+    println()
+    println("Part 1 answer: $ansPart1")
+    println("Part 2 answer: $ansPart2")
+
+    val totalTime = endPart2 - startLoadData
+    val loadDataTime = endLoadData - startLoadData
+    val parse1Time = endParse1 - startParse1
+    val parse2Time = endParse2 - startParse2
+    val solve1Time = endPart1 - startPart1
+    val solve2Time = endPart2 - startPart2
+    println()
+    println("Running times")
+
+    println(java.lang.String.format("%6s%10s", "Name", "Time(ms)"))
+    printFormatted("Total", totalTime)
+    printFormatted("Load", loadDataTime)
+    printFormatted("Parse1", parse1Time)
+    printFormatted("Parse2", parse2Time)
+    printFormatted("Solve1", solve1Time)
+    printFormatted("Solve2", solve2Time)
 }
 
 fun loadRawData(path: String): String {
     val workingDir = System.getProperty("user.dir")
     val f = File(workingDir + "/" + path)
     return f.readText()
+}
+
+fun printFormatted(title: String, nanotime: Long) {
+    val milliseconds = nanotime / 1000000
+
+    println(java.lang.String.format("%6s%10d", title, milliseconds))
+
 }
 
 fun formatNanoAsMilli(duration: Long): String {
