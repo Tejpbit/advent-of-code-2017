@@ -57,13 +57,14 @@ class Day10: Day<List<Int>> {
         }
 
 
-        return circle.windowed(16, 16)
+        return circle.chunked(16)
                 .map {
-                    it.reduce {acc, i -> acc.xor(i) }
-                }.map(java.lang.Integer::toHexString)
-                .map { if (it.length < 2) "0"+it else it }
+                    it.reduce {acc, i -> acc xor i }
+                }.map(Int::toHexString)
                 .joinToString("")
-
     }
+}
 
+fun Int.toHexString(): String {
+    return this.toString(16).padStart(2,'0')
 }
