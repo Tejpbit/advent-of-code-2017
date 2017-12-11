@@ -122,4 +122,17 @@ class AdventOfCodeTest {
         p1 = mutableListOf(0,2,7,0)
         assertEquals(4, d.part2(p1))
     }
+
+    @Test
+    fun day11() {
+        val d = Day11()
+
+
+        assertEquals(3, d.part1(d.parse("ne,ne,ne")))
+        assertEquals(0, d.part1(d.parse("ne,ne,sw,sw")))
+        assertEquals(2, d.part1(d.parse("ne,ne,s,s")))
+        assertEquals(3, d.part1(d.parse("se,sw,se,sw,sw")))
+
+    }
+
 }
