@@ -4,11 +4,11 @@ class Day6: Day<MutableList<Int>> {
     }
 
     fun redistribute(banks: MutableList<Int>) {
-        var largest = banks.max()
-        var largestIndex = banks.indexOf(largest)
+        var largestIndex = banks.indices.maxBy { banks[it] } ?: -1
+        var largest = banks[largestIndex]
         banks[largestIndex] = 0
 
-        while (largest!! > 0) {
+        while (largest > 0) {
             largestIndex = largestIndex.plus(1).rem(banks.size)
             banks[largestIndex]++
             largest--
@@ -16,7 +16,7 @@ class Day6: Day<MutableList<Int>> {
     }
 
     override fun part1(input: MutableList<Int>): Any {
-        val memory = hashSetOf<List<Int>>()
+        val memory = hashSetOf<MutableList<Int>>()
         var count = 0
 
         while (true) {
@@ -26,14 +26,14 @@ class Day6: Day<MutableList<Int>> {
             if (memory.contains(input.toList())) {
                 break
             }
-            memory.add(input.toList())
+            memory.add(input)
         }
 
         return count
     }
 
     override fun part2(input: MutableList<Int>): Any {
-        val memory = hashMapOf<List<Int>, Int>()
+        val memory = hashMapOf<MutableList<Int>, Int>()
         var count = 0
 
         while (true) {
@@ -43,10 +43,10 @@ class Day6: Day<MutableList<Int>> {
             if (memory.contains(input.toList())) {
                 break
             }
-            memory[input.toList()]=count
+            memory[input]=count
         }
 
-        return count - memory[input.toList()]!!
+        return count - memory[input]!!
     }
 
 }
