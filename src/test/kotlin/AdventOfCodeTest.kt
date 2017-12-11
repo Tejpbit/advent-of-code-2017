@@ -123,6 +123,49 @@ class AdventOfCodeTest {
         assertEquals(4, d.part2(p1))
     }
 
+
+    @Test
+    fun day10() {
+        val d = Day10()
+
+        var circle = listOf(0,1,2,3,4)
+
+        circle = d.subReverse(circle, 0, 3)
+        assertEquals(listOf(2,1,0,3,4), circle)
+
+        circle = d.subReverse(circle, 3, 4)
+        assertEquals(listOf(4,3,0,1,2), circle)
+
+        circle = d.subReverse(circle, 3, 1)
+        assertEquals(listOf(4,3,0,1,2), circle)
+
+        circle = d.subReverse(circle, 1, 5)
+        assertEquals(listOf(3,4,2,1,0), circle)
+
+    }
+
+    @Test
+    fun day10part2parse() {
+        val d = Day10()
+
+        assertEquals(listOf(49,44,50,44,51), d.parse2("1,2,3"))
+        assertEquals(listOf(49,48,44,50,44,51), d.parse2("10,2,3"))
+
+
+    }
+
+
+    @Test
+    fun day10part2checkHash() {
+        val d = Day10()
+
+        assertEquals("a2582a3a0e66e6e86e3812dcb672a272", d.part2(d.parse2("")))
+        assertEquals("33efeb34ea91902bb2f59c9920caa6cd", d.part2(d.parse2("AoC 2017")))
+        assertEquals("3efbe78a8d82f29979031a4aa0b16a9d", d.part2(d.parse2("1,2,3")))
+        assertEquals("63960835bcdc130f0b66d7ff4f6a5a8e", d.part2(d.parse2("1,2,4")))
+
+    }
+
     @Test
     fun day11() {
         val d = Day11()
