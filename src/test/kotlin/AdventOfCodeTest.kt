@@ -125,6 +125,18 @@ class AdventOfCodeTest {
 
 
     @Test
+    fun day8() {
+        val d = Day8()
+
+        var p1 = d.parse("b inc 5 if a > 1\n" +
+                "a inc 1 if b < 5\n" +
+                "c dec -10 if a >= 1\n" +
+                "c inc -20 if c == 10")
+
+        assertEquals(1, d.part1(p1))
+    }
+
+    @Test
     fun day9() {
         val d = Day9()
 
