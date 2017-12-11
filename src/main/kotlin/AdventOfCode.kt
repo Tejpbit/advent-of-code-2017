@@ -2,6 +2,7 @@ import java.io.File
 import java.sql.Time
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlin.math.round
 import kotlin.system.measureNanoTime
 
 val dayInstances = arrayOf(
@@ -96,7 +97,7 @@ fun run(dayOfMonth: Int) {
     println()
     println("Running times")
 
-    println(java.lang.String.format("%6s%10s", "Name", "Time(ms)"))
+    println(java.lang.String.format("%6s%10s%10s%10s", "Name", "Time(ms)", "Time(µs)", "Time(ns)"))
     printFormatted("Total", totalTime)
     printFormatted("Load", loadDataTime)
     printFormatted("Parse1", parse1Time)
@@ -112,6 +113,7 @@ fun loadRawData(path: String): String {
 }
 
 fun printFormatted(title: String, nanotime: Long) {
-    val milliseconds = nanotime / 1000000
-    println(java.lang.String.format("%6s%10d", title, milliseconds))
+    val milliseconds = round(nanotime / 1000000.0).toInt()
+    val microseconds = round(nanotime / 1000.0).toInt()
+    println(java.lang.String.format("%6s%10d%10d%10d", title, milliseconds, microseconds, nanotime))
 }
