@@ -125,6 +125,24 @@ class AdventOfCodeTest {
 
 
     @Test
+    fun day9() {
+        val d = Day9()
+
+
+
+        assertEquals(6, d.part1("{{{}}}"))
+        assertEquals(5, d.part1("{{},{}}"))
+        assertEquals(16, d.part1("{{{},{},{{}}}}"))
+        assertEquals(1, d.part1("{<a>,<a>,<a>,<a>}"))
+        assertEquals(9, d.part1("{{<ab>},{<ab>},{<ab>},{<ab>}}"))
+        assertEquals(9, d.part1("{{<!!>},{<!!>},{<!!>},{<!!>}}"))
+        assertEquals(3, d.part1("{{<a!>},{<a!>},{<a!>},{<ab>}}"))
+
+
+        assertEquals(17, d.part2("{{<a!>},{<a!>},{<a!>},{<ab>}}"))
+    }
+
+    @Test
     fun day10() {
         val d = Day10()
 
