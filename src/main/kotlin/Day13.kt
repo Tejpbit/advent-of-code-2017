@@ -28,8 +28,8 @@ class Day13: Day<List<Day13.Layer>> {
 
     override fun part2(input: List<Layer>): Any {
         var offset = -1
-        var success = false
-        loop@ while (!success) {
+
+        loop@while (true) {
             offset++
 
             for (layer in input) {
@@ -38,10 +38,9 @@ class Day13: Day<List<Day13.Layer>> {
                     continue@loop
                 }
             }
-            success = true
+            break
         }
-
-
+        
         return offset
     }
 
