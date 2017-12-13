@@ -208,6 +208,25 @@ class AdventOfCodeTest {
 
     }
 
+    @Test
+    fun day12() {
+        val d = Day12()
+
+        val p1 = d.parse("0 <-> 2\n" +
+                "1 <-> 1\n" +
+                "2 <-> 0, 3, 4\n" +
+                "3 <-> 2, 4\n" +
+                "4 <-> 2, 3, 6\n" +
+                "5 <-> 6\n" +
+                "6 <-> 4, 5")
+
+
+
+        assertEquals(6, d.part1(p1))
+
+        assertEquals(2, d.part2(p1))
+
+    }
 
     @Test
     fun day13() {
