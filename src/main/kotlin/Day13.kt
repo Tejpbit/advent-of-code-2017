@@ -9,7 +9,7 @@ class Day13: Day<List<Day13.Layer>> {
     override fun parse(input: String): List<Layer> {
         return input.lines().map {
             val s = it.split(": ")
-            Layer(s[0].trim().toInt(), s[1].trim().toInt())
+            Layer(s[0].toInt(), s[1].toInt())
         }
     }
 
@@ -40,7 +40,7 @@ class Day13: Day<List<Day13.Layer>> {
             }
             break
         }
-        
+
         return offset
     }
 

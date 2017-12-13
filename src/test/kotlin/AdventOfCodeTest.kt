@@ -233,9 +233,9 @@ class AdventOfCodeTest {
         val d = Day13()
 
         val p1 = d.parse("0: 3\n" +
-                "    1: 2\n" +
-                "    4: 4\n" +
-                "    6: 4")
+                "1: 2\n" +
+                "4: 4\n" +
+                "6: 4")
 
 
 
