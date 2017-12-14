@@ -243,6 +243,40 @@ class AdventOfCodeTest {
         assertEquals(10, d.part2(p1))
     }
 
+    @Test
+    fun day14() {
+        val d = Day14()
+
+
+        assertEquals("1010000011000010000000010111",
+                "a0c2017".hexToBinary())
+
+        assertEquals( 8108, d.createGraph("flqrgnkx").getNodeSet().size)
+        val binGrid = d.createBinaryGrid("flqrgnkx")
+        assertEquals( 128, binGrid.size)
+        binGrid.forEach { assertEquals(128, it.length) }
+
+        assertEquals(8108, d.part1("flqrgnkx"))
+
+        val customBinGrid = listOf(
+                "01010111",
+                "11010000",
+                "00111011",
+                "01001010",
+                "10011001",
+                "00000000",
+                "01100011",
+                "00110100"
+        )
+
+
+        val d12 = Day12()
+        assertEquals(10, d12.part2(d.graphFromBinGrid(customBinGrid)))
+
+        //assertEquals(1242, d.part2("flqrgnkx"))
+
+    }
+
 
 
 }

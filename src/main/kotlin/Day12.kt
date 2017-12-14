@@ -2,43 +2,78 @@ class Day12: Day<Day12.Graph> {
     val regex = "(\\d+) <-> (.*)".toRegex()
 
     data class Node(val id: String)
-    data class Edge(val id1: String, val id2: String)
-    data class Graph(val nodes: MutableMap<String, Node>, val edges: MutableList<Edge>)
+    data class Edge(val from: Node, val to: Node)
+    data class Graph(
+            private var nodes: MutableMap<String, Node>,
+            private var edges: MutableMap<Node, MutableList<Node>>
+    ){
+        constructor() : this(mutableMapOf(), mutableMapOf())
 
-    fun Graph.neighbours(id: String): List<Node> {
-        val a = this.edges.filter { it.id1 == id || it.id2 == id }
-                .map { if (it.id1 == id) this.nodes[it.id2]!! else this.nodes[it.id1]!! }
-                .toMutableList()
-                .distinctBy { it.id }
-        return a
-    }
+        fun getNodeSet(): Set<Node> {
+            return this.nodes.values.toSet()
+        }
 
-    fun Graph.breadthFirstSearch(startId: String): List<Node> {
-        val visited = mutableListOf<Node>()
-        var next = mutableListOf(this.nodes[startId]!!)
+        fun isEmpty(): Boolean {
+            return this.nodes.isEmpty()
+        }
 
-        while (next.isNotEmpty()) {
-            visited.addAll(next)
-            val newNext = next.map { this.neighbours(it.id) }
-                    .flatten()
-                    .filter { node -> !visited.contains(node) }
-            next = newNext.toMutableList()
+        fun setNode(n: Node) {
+            this.nodes[n.id] = n
+            this.edges[n] = this.edges[n] ?: mutableListOf()
+        }
+
+        fun addEdge(e: Edge) {
+            this.setNode(e.from)
+            this.setNode(e.to)
+            this.edges[e.from]?.add(e.to)
+            this.edges[e.to]?.add(e.from)
 
         }
-        return visited
+
+        fun removeNode(n: Node) {
+            this.nodes.remove(n.id)
+            edges[n]?.removeAll { it.id == n.id }
+            this.edges.remove(n)
+        }
+
+        fun removeNodes(n: List<Node>) {
+            n.forEach { this.removeNode(it) }
+        }
+
+        fun neighbours(id: String): List<Node> {
+            val node = this.nodes[id]
+            return (edges[node] ?: mutableListOf()).toList()
+        }
+
+        fun breadthFirstSearch(startId: String): List<Node> {
+            //val visited = mutableListOf<Node>()
+            val visited = mutableSetOf<Node>()
+            var next = mutableListOf(this.nodes[startId]!!)
+
+            while (next.isNotEmpty()) {
+                visited.addAll(next)
+                val newNext = next.map { this.neighbours(it.id) }
+                        .flatten()
+                        .filter { node -> !visited.contains(node) }
+                next = newNext.toMutableList()
+
+            }
+            return visited.toList()
+        }
     }
 
+
     override fun parse(input: String): Graph {
-        val graph = Graph(mutableMapOf(), mutableListOf())
+        val graph = Graph()
 
         input.lines().map {
             val groups = regex.matchEntire(it)?.groups
             val source  = groups?.get(1)?.value
             val ids = groups?.get(2)?.value?.split(", ")
 
-            graph.nodes[source!!] = (Node(source))
+            graph.setNode(Node(source!!))
             for (id in ids!!) {
-                graph.edges.add(Edge(source, id))
+                graph.addEdge(Edge(Node(source), Node(id)))
             }
         }
 
@@ -50,11 +85,12 @@ class Day12: Day<Day12.Graph> {
     }
 
     override fun part2(input: Graph): Any {
-        val nodes = input.nodes.values.toMutableSet()
         var groupCount = 0
 
-        while (nodes.isNotEmpty()) {
-            nodes.removeAll(input.breadthFirstSearch(nodes.first().id))
+        while (! input.isEmpty()) {
+            input.removeNodes(
+                    input.breadthFirstSearch(input.getNodeSet().first().id)
+            )
             groupCount++
         }
         return groupCount
