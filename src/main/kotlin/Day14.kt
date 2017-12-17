@@ -1,3 +1,7 @@
+import Day12.Graph
+import Day12.Node
+import Day12.Edge
+
 class Day14: Day<String> {
     override fun parse(input: String): String {
         return input
@@ -34,9 +38,9 @@ class Day14: Day<String> {
         return graphFromBinGrid(binGrid)
     }
 
-    fun graphFromBinGrid(binGrid: List<String>): Day12.Graph {
+    fun graphFromBinGrid(binGrid: List<String>): Graph {
         val grid = binGrid.map { it.chunked(1) }
-        val graph = Day12.Graph()
+        val graph = Graph()
 
 
 
@@ -45,16 +49,16 @@ class Day14: Day<String> {
                 if (cell == "1") {
 
                     val nodeName = "$x,$y"
-                    graph.setNode(Day12.Node(nodeName))
+                    graph.setNode(Node(nodeName))
 
                     if (x+1 < grid[y].size && grid[y][x+1] == "1") {
                         graph.addEdge(
-                                Day12.Edge(Day12.Node(nodeName), Day12.Node("${x+1},$y"))
+                                Edge(Node(nodeName), Node("${x+1},$y"))
                         )
                     }
                     if (y+1 < grid.size && grid[y+1][x] == "1") {
                         graph.addEdge(
-                                Day12.Edge(Day12.Node(nodeName), Day12.Node("$x,${y+1}"))
+                                Edge(Node(nodeName), Node("$x,${y+1}"))
                         )
                     }
 
