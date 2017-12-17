@@ -273,10 +273,10 @@ class AdventOfCodeTest {
         val d12 = Day12()
         assertEquals(10, d12.part2(d.graphFromBinGrid(customBinGrid)))
 
-        //assertEquals(1242, d.part2("flqrgnkx"))
+        assertEquals(1242, d.part2("flqrgnkx"))
 
     }
-
+    
 
 
 }
