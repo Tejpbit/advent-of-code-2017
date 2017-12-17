@@ -276,7 +276,16 @@ class AdventOfCodeTest {
         assertEquals(1242, d.part2("flqrgnkx"))
 
     }
-    
+
+    @Test
+    fun day15() {
+        val d = Day15()
+
+        d.checkGens(65, 8921)
+        d.checkPart2Gens(65, 8921)
+
+    }
+
 
 
 }
