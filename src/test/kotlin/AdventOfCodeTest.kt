@@ -288,4 +288,21 @@ class AdventOfCodeTest {
 
 
 
+    @Test
+    fun day19() {
+        val d = Day19()
+
+
+        val p1 = d.parse("" +
+                "     |          \n" +
+                "     |  +--+    \n" +
+                "     A  |  C    \n" +
+                " F---|----E|--+ \n" +
+                "     |  |  |  D \n" +
+                "     +B-+  +--+ \n")
+
+        assertEquals("ABCDEF", d.part1(p1))
+
+        assertEquals(38, d.part2(p1))
+    }
 }
