@@ -2,7 +2,7 @@ group 'xyz.tejp.advent_of_code_2017'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.2.0'
+    ext.kotlin_version = '1.2.10'
     ext.junitJupiterVersion = '5.0.2'
 
     repositories {
@@ -34,6 +34,9 @@ dependencies {
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 
+    // Coroutines
+    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.20'
+
     compile "org.jetbrains.kotlin:kotlin-reflect"
     testCompile "org.jetbrains.kotlin:kotlin-test"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit"
@@ -54,4 +57,9 @@ task run1(type: JavaExec) {
     date += 1
     def formattedDate = date.format('dd')
     args = [formattedDate]
+}
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }
